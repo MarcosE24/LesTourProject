@@ -9,3 +9,5 @@ class Reserva(models.Model):
     request_datetime= models.DateTimeField(auto_now_add=True)
     id_room= models.IntegerField(default=0)
     observation= models.TextField(blank=True, max_length=500)
+    def __str__(self):
+        return self.id_user
