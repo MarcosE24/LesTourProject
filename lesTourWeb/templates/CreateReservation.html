@@ -2,7 +2,8 @@
 {% block content %}
 
 <h1>Create Reservation</h1>
-<form action="/reserva/create/" method="POST">
+{{error}}
+<form action="/reservation/create/" method="POST">
     {% csrf_token %}
     {{form}}
     <button>Reservar</button>

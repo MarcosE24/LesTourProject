@@ -57,6 +57,14 @@ def signIn(request):
 
 def createReservation(request):
     if request.method == "GET":
-        return render(request, "CreateReserva.html", {"form":ReservaForm})
+        return render(request, "CreateReservation.html", {"form":ReservaForm})
     else:
-        return render(request, "CreateReserva.html", {"form":ReservaForm})
+        try:
+            form= ReservaForm(request.POST)
+            newReservation= form.save(commit= False)
+            newReservation.save()
+            #newReservation.user= request.user
+            #print(newReservation)
+            return render(request, "CreateReservation.html", {"form":ReservaForm})
+        except ValueError:
+            return render(request, "CreateReservation.html", {"form":ReservaForm, "error":"Ingrese datos validos porfavor"})
