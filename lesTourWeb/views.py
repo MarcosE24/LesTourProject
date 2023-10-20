@@ -4,12 +4,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .forms import ReservaForm
+from django.contrib.auth.decorators import login_required
 
-
-def home(request):
+def home(request):  #home view
     return render(request, "Home.html")
 
-def signUp(request):
+def signUp(request):    #register view
     if request.method == "GET":
         return render(request, "SignUp.html", {"form": UserCreationForm})
     else:
@@ -36,14 +36,15 @@ def signUp(request):
                 {"form": UserCreationForm, "error": "Las contraseñas no coinciden"},
             )
 
-def reservation(request):
+def reservation(request):   #hay que ver que hacer con esta vista, si mostrar las reservas y el historial o quitarla
     return render(request, "Reservation.html")
 
-def signOut(request):
+@login_required
+def signOut(request):   #logout function and show home view
     logout(request)
     return redirect("home")
 
-def signIn(request):
+def signIn(request):    #login view
     if request.method == "GET":
         return render(request, "SignIn.html", {"form":AuthenticationForm})
     else:
@@ -55,6 +56,7 @@ def signIn(request):
             login(request, user)
             return redirect("reservation")
 
+@login_required
 def createReservation(request):
     if request.method == "GET":
         return render(request, "CreateReservation.html", {"form":ReservaForm})
