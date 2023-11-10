@@ -11,3 +11,10 @@ class Reserva(models.Model):
     observation= models.TextField(blank=True, max_length=500)
     def __str__(self):
         return self.id_user
+    
+class Usuario(models.Model):
+    nombre= models.CharField(max_length=100)
+    edad= models.IntegerField()
+    telefono= models.IntegerField
+    def __str__(self):
+        return self.nombre
