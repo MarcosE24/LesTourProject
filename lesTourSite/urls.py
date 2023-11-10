@@ -14,8 +14,8 @@ urlpatterns = [
 
 
     ## inicio segunda parcial ##
-    path("hoteles/", views.Hoteles, name="hoteles"),
-    path("personal/", views.Personal, name="personal"),
-    path("usuarios/", views.Usuarios, name="usuarios")
+    path("hoteles/", views.hoteles, name="hoteles"),
+    path("personal/", views.personal, name="personal"),
+    path("usuarios/", views.usuarios, name="usuarios")
     
 ]

@@ -72,11 +72,11 @@ def createReservation(request):
             return render(request, "CreateReservation.html", {"form":ReservaForm, "error":"Ingrese datos validos porfavor"})
         
 ## inicio de la segunda parcial ##
-def Hoteles (request):
+def hoteles (request):
     return render(request, "Hoteles.html")
 
-def Personal (request):
+def personal (request):
     return render(request, "Personal.html")
 
-def Usuarios (request):
+def usuarios (request):
     return render(request, "Usuarios.html")
