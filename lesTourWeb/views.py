@@ -70,3 +70,13 @@ def createReservation(request):
             return render(request, "CreateReservation.html", {"form":ReservaForm})
         except ValueError:
             return render(request, "CreateReservation.html", {"form":ReservaForm, "error":"Ingrese datos validos porfavor"})
+        
+## inicio de la segunda parcial ##
+def Hoteles (request):
+    return render(request, "Hoteles.html")
+
+def Personal (request):
+    return render(request, "Personal.html")
+
+def Usuarios (request):
+    return render(request, "Usuarios.html")

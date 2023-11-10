@@ -10,5 +10,12 @@ urlpatterns = [
     path("reservation/", views.reservation, name="reservation"),
     path("logout/", views.signOut, name="logout"),
     path("signin/", views.signIn, name="signin"),
-    path("reservation/create/", views.createReservation, name="createReservation")
+    path("reservation/create/", views.createReservation, name="createReservation"),
+
+
+    ## inicio segunda parcial ##
+    path("hoteles/", views.Hoteles, name="hoteles"),
+    path("personal/", views.Personal, name="personal"),
+    path("usuarios/", views.Usuarios, name="usuarios")
+    
 ]
