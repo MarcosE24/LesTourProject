@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .forms import ReservaForm
 from django.contrib.auth.decorators import login_required
+from lesTourApp.models import Hoteles 
 
 def home(request):  #home view
     return render(request, "Home.html")
@@ -70,3 +71,7 @@ def createReservation(request):
             return render(request, "CreateReservation.html", {"form":ReservaForm})
         except ValueError:
             return render(request, "CreateReservation.html", {"form":ReservaForm, "error":"Ingrese datos validos porfavor"})
+
+def hoteles(request):
+    hoteles = Hoteles.objects.all()  # Recupera todos los registros de la tabla Hoteles
+    return render(request, 'Hoteles.html', {'hoteles': hoteles})
