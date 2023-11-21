@@ -63,11 +63,10 @@ def createReservation(request):
         return render(request, "CreateReservation.html", {"form":ReservaForm})
     else:
         try:
-            form= ReservaForm(request.POST)
-            newReservation= form.save(commit= False)
+            newReservation= ReservaForm(request.POST).save(commit=False)
+            print(request.user) #probar
+            newReservation.user= request.user
             newReservation.save()
-            #newReservation.user= request.user
-            #print(newReservation)
             return render(request, "CreateReservation.html", {"form":ReservaForm})
         except ValueError:
             return render(request, "CreateReservation.html", {"form":ReservaForm, "error":"Ingrese datos validos porfavor"})

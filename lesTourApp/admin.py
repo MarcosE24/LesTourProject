@@ -1,6 +1,6 @@
 from . import models
 from django.contrib import admin
-from .models import Ciudades, Clientes, Reservas, Hoteles, Habitacion, Tipo_Habitacion, Reserva_Huesped, Cargo, Areas, Empleados
+from .models import Ciudades, Clientes, Hoteles, Habitacion, Tipo_Habitacion, Cargo, Areas, Empleados, Reserva_Huesped, Reservas
 
 @admin.register(Ciudades)
 class CiudadesAdmin(admin.ModelAdmin):
@@ -18,7 +18,7 @@ class ClientesAdmin(admin.ModelAdmin):
 
 @admin.register(Reservas)
 class ReservasAdmin(admin.ModelAdmin):
-    ordering = ['id_cliente']
+    ordering = ['cliente']
 
 @admin.register(Hoteles)
 class HotelesAdmin(admin.ModelAdmin):
