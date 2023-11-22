@@ -5,12 +5,12 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .forms import ReservaForm
 from django.contrib.auth.decorators import login_required
-from lesTourApp.models import Hoteles 
+from lesTourApp.models import Hoteles
 
-def home(request):  #home view
+def home(request):  #Home view
     return render(request, "Home.html")
 
-def signUp(request):    #register view
+def signUp(request):    #Register view
     if request.method == "GET":
         return render(request, "SignUp.html", {"form": UserCreationForm})
     else:
@@ -41,11 +41,11 @@ def reservation(request):   #hay que ver que hacer con esta vista, si mostrar la
     return render(request, "Reservation.html")
 
 @login_required
-def signOut(request):   #logout function and show home view
+def signOut(request):   #Logout function and show home view
     logout(request)
     return redirect("home")
 
-def signIn(request):    #login view
+def signIn(request):    #Login view
     if request.method == "GET":
         return render(request, "SignIn.html", {"form":AuthenticationForm})
     else:
@@ -58,15 +58,16 @@ def signIn(request):    #login view
             return redirect("reservation")
 
 @login_required
-def createReservation(request):
+def createReservation(request): #View that renders the page in "GET" and saves the reservation data in "POST"
     if request.method == "GET":
         return render(request, "CreateReservation.html", {"form":ReservaForm})
     else:
         try:
-            newReservation= ReservaForm(request.POST).save(commit=False)
-            print(request.user) #probar
-            newReservation.user= request.user
-            newReservation.save()
+            form = ReservaForm(request.POST) #Recover template data
+            if form.is_valid(): #Validate with ReservaForm from forms.py
+                newReservation = form.save(commit=False) #"commit=false" to save the recovered data without committing to the DB
+                newReservation.cliente = request.user   #Assign the user who created the reservation, obtained from the login
+                newReservation.save()   #finally, commit to the DB
             return render(request, "CreateReservation.html", {"form":ReservaForm})
         except ValueError:
             return render(request, "CreateReservation.html", {"form":ReservaForm, "error":"Ingrese datos validos porfavor"})
