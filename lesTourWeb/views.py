@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .forms import ReservaForm
 from django.contrib.auth.decorators import login_required
-from lesTourApp.models import Hoteles, Habitacion, Reservas, Tipo_Habitacion
+from lesTourApp.models import Hoteles, Habitacion, Reservas, Tipo_Habitacion, Empleados, Clientes
 from datetime import datetime
 
 def home(request):  #Home view
@@ -90,3 +90,26 @@ def habitaciones_hotel(request):
 
     return render(request, 'habitaciones_hotel.html', {'habitaciones': habitaciones, 'hoteles': hoteles})
 
+# Decorador para restringir el acceso a administradores
+def es_admin(user):
+    return user.is_authenticated and user.is_staff  # Suponiendo que el admin es un staff
+
+
+def dashboard(request):
+    # Obtener recuentos de información
+    total_hoteles = Hoteles.objects.count()
+    total_habitaciones = Habitacion.objects.count()
+    total_reservas = Reservas.objects.count()
+    total_empleados = Empleados.objects.count()
+    total_clientes = Clientes.objects.count()
+
+    # Obtener información adicional si es necesario...
+
+    return render(request, 'dashboard.html', {
+        'total_hoteles': total_hoteles,
+        'total_habitaciones': total_habitaciones,
+        'total_reservas': total_reservas,
+        'total_empleados': total_empleados,
+        'total_clientes': total_clientes,
+        # Otros datos que quieras mostrar en el dashboard
+    })

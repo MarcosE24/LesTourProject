@@ -11,6 +11,8 @@ urlpatterns = [
     path("signin/", views.signIn, name="signin"),
     path("reservation/create/", views.createReservation, name="createReservation"),
     path("hotels/", views.hoteles, name="hotels"),
-    path("habitaciones_hotel/", views.habitaciones_hotel, name="habitaciones_hotel")
+    path("habitaciones_hotel/", views.habitaciones_hotel, name="habitaciones_hotel"),
+    path("dashboard/", views.dashboard, name="dashboard")
+
 
 ]
