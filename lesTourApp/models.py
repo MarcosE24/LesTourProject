@@ -60,7 +60,7 @@ class Clientes(models.Model): #tabla para registrar clientes
     def __str__(self):
         return self.nombre
     class Meta:
-        verbose_name_plural = "Clientes"
+        verbose_name_plural = "Clientes" 
 
 class Tipo_Habitacion(models.Model): #tabla para registrar los tipos de habitaciones
     nombre=models.CharField(max_length=100)

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Habitaciones del Hotel</title>
+</head>
+<body>
+    <h1>Habitaciones Disponibles</h1>
+
+    <form action="" method="GET">
+        <label for="fecha">Seleccionar fecha:</label>
+        <input type="date" id="fecha" name="fecha" value="{{ fecha_ingresada }}">
+        
+        <label for="tipo">Seleccionar tipo de habitación:</label>
+        <select id="tipo" name="tipo">
+            <option value="">Todos los tipos</option>
+            {% for tipo in tipos_habitacion %}
+                <option value="{{ tipo.id }}" {% if tipo.id == tipo_seleccionado %} selected {% endif %}>{{ tipo.nombre }}</option>
+            {% endfor %}
+        </select>
+        
+        <label for="hotel">Seleccionar hotel:</label>
+        <select id="hotel" name="hotel">
+            <option value="">Todos los hoteles</option>
+            {% for hotel in hoteles %}
+                <option value="{{ hotel.id }}" {% if hotel.id == hotel_seleccionado %} selected {% endif %}>{{ hotel.nombre }}</option>
+            {% endfor %}
+        </select>
+        
+        <input type="submit" value="Filtrar">
+    </form>
+
+    <h2>Habitaciones disponibles</h2>
+    <ul>
+        {% for habitacion in habitaciones %}
+            <li>{{ habitacion.numero }} - {{ habitacion.piso }} - {{ habitacion.id_tipo_habitacion.nombre }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

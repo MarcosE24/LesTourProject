@@ -5,7 +5,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .forms import ReservaForm
 from django.contrib.auth.decorators import login_required
-from lesTourApp.models import Hoteles
+from lesTourApp.models import Hoteles, Habitacion, Reservas, Tipo_Habitacion
+from datetime import datetime
 
 def home(request):  #Home view
     return render(request, "Home.html")
@@ -75,3 +76,17 @@ def createReservation(request): #View that renders the page in "GET" and saves t
 def hoteles(request):
     hoteles = Hoteles.objects.all()  # Recupera todos los registros de la tabla Hoteles
     return render(request, 'Hoteles.html', {'hoteles': hoteles})
+
+
+
+
+def habitaciones_hotel(request):
+    hoteles = Hoteles.objects.all()
+    hotel_id = request.GET.get('hotel', None)
+    habitaciones = Habitacion.objects.all()
+
+    if hotel_id:
+        habitaciones = habitaciones.filter(id_hotel=hotel_id)
+
+    return render(request, 'habitaciones_hotel.html', {'habitaciones': habitaciones, 'hoteles': hoteles})
+
