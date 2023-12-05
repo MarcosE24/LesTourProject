@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.test import Client
 from django.contrib.auth.models import User
-from .models import Hoteles
+from .models import Ciudades, Hoteles, Areas, Cargo, Empleados, Clientes, Tipo_Habitacion, Habitacion, Reservas, Reserva_Huesped
 
 #PRUEBAS PARA LAS URLS
 class TestUrls(TestCase):
@@ -25,6 +25,27 @@ class TestUrls(TestCase):
         url = reverse('signin')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+
+#PRUEBAS PARA LOS MODELS
+class TestModels(TestCase):
+    def test_hoteles(self):
+        # Crear un Hotel con todos los campos, incluyendo el nombre
+        hotel = Hoteles.objects.create(
+            nombre='Hotel',
+            ciudad='Villarrica',
+            barrio='Barrio San Juan',
+            direccion='San Juan',
+            telefono=123456789,
+            email='test@gmail.com',
+            pisos=5,
+            habitaciones=50
+        )
+        # Verificar si se creó el hotel exitosamente
+        self.assertIsNotNone(hotel)
+        
+    def test_ciudades(self):
+        ciudad = Ciudades.objects.create(nombre='Iturbe')
+        self.assertEqual(ciudad.nombre, 'Iturbe')
 
 #PRUEBAS PARA LAS VISTAS
 class TestViews(TestCase):
