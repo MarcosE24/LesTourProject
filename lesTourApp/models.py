@@ -62,7 +62,7 @@ class Clientes(models.Model): #tabla para registrar clientes
     class Meta:
         verbose_name_plural = "Clientes" 
 
-class Tipo_Habitacion(models.Model): #tabla para registrar los tipos de habitaciones
+class TipoHabitacion(models.Model): #tabla para registrar los tipos de habitaciones
     nombre=models.CharField(max_length=100)
     capacidad=models.IntegerField()
     costo=models.IntegerField()
@@ -74,7 +74,7 @@ class Tipo_Habitacion(models.Model): #tabla para registrar los tipos de habitaci
 class Habitacion(models.Model): #tabla para registrar las habitaciones
     numero=models.IntegerField()
     piso=models.IntegerField()
-    id_tipo_habitacion=models.ForeignKey(Tipo_Habitacion, on_delete=models.CASCADE)
+    id_tipo_habitacion=models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
     id_hotel=models.ForeignKey(Hoteles, on_delete=models.CASCADE)
     def __str__(self):
         return str(self.id_tipo_habitacion) + ": \"" + str(self.id_hotel) + "\""    #Devuelve el nombre y el hotel
@@ -93,8 +93,8 @@ class Reservas(models.Model): #tabla para registrar las reservas
     class Meta:
         verbose_name_plural = "Reservas"
 
-class Reserva_Huesped(models.Model): #tabla para registrar mas de un huesped a una reserva
+class ReservaHuesped(models.Model): #tabla para registrar mas de un huesped a una reserva
     id_cliente=models.ForeignKey(Clientes, on_delete=models.CASCADE)
     id_reserva=models.ForeignKey(Reservas, on_delete=models.CASCADE)
     class Meta:
-        verbose_name_plural = "Reserva_Huespedes"
+        verbose_name_plural = "ReservaHuespedes"

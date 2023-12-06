@@ -5,15 +5,22 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .forms import ReservaForm
 from django.contrib.auth.decorators import login_required
-from lesTourApp.models import Hoteles, Habitacion, Reservas, Tipo_Habitacion, Empleados, Clientes
+from lesTourApp.models import Hoteles, Habitacion, Reservas, TipoHabitacion, Empleados, Clientes
 from datetime import datetime
+
+#CONSTANTES TEMPLATE
+SIGNUP_HTML_TEMPLATE = "SignUp.html"
+CREATE_RESERVATION_HTML_TEMPLATE = "CreateReservation.html"
 
 def home(request):  #Home view
     return render(request, "Home.html")
 
-def signUp(request):    #Register view
+def SignUp(request):    #Register view
     if request.method == "GET":
-        return render(request, "SignUp.html", {"form": UserCreationForm})
+        return render(
+            request, 
+            SIGNUP_HTML_TEMPLATE, 
+            {"form": UserCreationForm})
     else:
         if request.POST["password1"] == request.POST["password2"]:
             # Register user
@@ -28,13 +35,13 @@ def signUp(request):    #Register view
             except IntegrityError:
                 return render(
                     request,
-                    "SignUp.html",
+                    SIGNUP_HTML_TEMPLATE,
                     {"form": UserCreationForm, "error": "El usuario ya existe"},
                 )
         else:
             return render(
                 request,
-                "SignUp.html",
+                SIGNUP_HTML_TEMPLATE,
                 {"form": UserCreationForm, "error": "Las contraseñas no coinciden"},
             )
 
@@ -61,17 +68,17 @@ def signIn(request):    #Login view
 @login_required
 def createReservation(request): #View that renders the page in "GET" and saves the reservation data in "POST"
     if request.method == "GET":
-        return render(request, "CreateReservation.html", {"form":ReservaForm})
+        return render(request, CREATE_RESERVATION_HTML_TEMPLATE, {"form":ReservaForm})
     else:
         try:
             form = ReservaForm(request.POST) #Recover template data
             if form.is_valid(): #Validate with ReservaForm from forms.py
-                newReservation = form.save(commit=False) #"commit=false" to save the recovered data without committing to the DB
-                newReservation.cliente = request.user   #Assign the user who created the reservation, obtained from the login
-                newReservation.save()   #finally, commit to the DB
-            return render(request, "CreateReservation.html", {"form":ReservaForm})
+                new_reservation = form.save(commit=False) #"commit=false" to save the recovered data without committing to the DB
+                new_reservation.cliente = request.user   #Assign the user who created the reservation, obtained from the login
+                new_reservation.save()   #finally, commit to the DB
+            return render(request, CREATE_RESERVATION_HTML_TEMPLATE, {"form":ReservaForm})
         except ValueError:
-            return render(request, "CreateReservation.html", {"form":ReservaForm, "error":"Ingrese datos validos porfavor"})
+            return render(request, CREATE_RESERVATION_HTML_TEMPLATE, {"form":ReservaForm, "error":"Ingrese datos validos porfavor"})
 
 def hoteles(request):
     hoteles = Hoteles.objects.all()  # Recupera todos los registros de la tabla Hoteles
