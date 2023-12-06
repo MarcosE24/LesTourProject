@@ -69,7 +69,7 @@ class TipoHabitacion(models.Model): #tabla para registrar los tipos de habitacio
     def __str__(self):
         return self.nombre
     class Meta:
-        verbose_name_plural = "Tipo_Habitaciones"
+        verbose_name_plural = "TipoHabitacion"
 
 class Habitacion(models.Model): #tabla para registrar las habitaciones
     numero=models.IntegerField()

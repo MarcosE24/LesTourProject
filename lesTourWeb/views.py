@@ -8,14 +8,16 @@ from django.contrib.auth.decorators import login_required
 from lesTourApp.models import Hoteles, Habitacion, Reservas, TipoHabitacion, Empleados, Clientes
 from datetime import datetime
 
+
+
 #CONSTANTES TEMPLATE
-SIGNUP_HTML_TEMPLATE = "SignUp.html"
+SIGNUP_HTML_TEMPLATE = "signUp.html"
 CREATE_RESERVATION_HTML_TEMPLATE = "CreateReservation.html"
 
 def home(request):  #Home view
     return render(request, "Home.html")
 
-def SignUp(request):    #Register view
+def signUp(request):    #Register view
     if request.method == "GET":
         return render(
             request, 
