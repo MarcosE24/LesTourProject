@@ -12,7 +12,6 @@ urlpatterns = [
     path("reservation/create/", views.createReservation, name="createReservation"),
     path("hotels/", views.hoteles, name="hotels"),
     path("habitaciones_hotel/", views.habitaciones_hotel, name="habitaciones_hotel"),
-    path("dashboard/", views.dashboard, name="dashboard")
-
-
+    path("dashboard/", views.dashboard, name="dashboard"),
+    path('nosotros/', views.nosotros, name='nosotros'),
 ]

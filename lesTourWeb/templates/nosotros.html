@@ -1,0 +1,30 @@
+{% extends "Main.html" %}
+
+{% block content %}
+    <div class="container mx-auto my-8">
+        <h1 class="text-4xl font-bold mb-4">Nosotros</h1>
+        <p>{{ informacion_empresa.mision }}</p>
+        <h2 class="text-2xl font-bold mt-4">Visión</h2>
+        <p>{{ informacion_empresa.vision }}</p>
+
+        <h2 class="text-2xl font-bold mt-4">Valores</h2>
+        <ul>
+            {% for valor in informacion_empresa.valores %}
+                <li>{{ valor }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2 class="text-2xl font-bold mt-4">Historia</h2>
+        <p>{{ informacion_empresa.historia }}</p>
+
+        <h2 class="text-2xl font-bold mt-4">Equipo</h2>
+        <ul>
+            {% for miembro in informacion_empresa.equipo %}
+                <li>{{ miembro.nombre }} - {{ miembro.puesto }}</li>
+            {% endfor %}
+        </ul>
+        <h2 class="text-2xl font-bold mt-4">Contacto</h2>
+        <p>Telefono: {{ informacion_empresa.contactos.telefono }}</p>
+        <p>Correo Electrónico: {{ informacion_empresa.contactos.correo }}</p>
+    </div>
+{% endblock %}

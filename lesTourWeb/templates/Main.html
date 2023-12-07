@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>LesTour Hotel</title>
+        {% load static %}
         <script src="https://cdn.tailwindcss.com"></script> <!--TailWindCSS CDN link-->
         <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.3/dist/full.css" rel="stylesheet" type="text/css"/> <!--DaisyUI CDN link-->
     </head>
@@ -45,7 +46,7 @@
                             <a href="/hotels">Hoteles</a>
                         </li>
                         <li>
-                            <a class="text-primary-800" href="/">Nosotros</a>
+                            <a href="{% url 'nosotros' %}">Nosotros</a>
                         </li>
                         <li>
                             <a class="text-primary-800" href="/">Contactos</a>

@@ -86,9 +86,6 @@ def hoteles(request):
     hoteles = Hoteles.objects.all()  # Recupera todos los registros de la tabla Hoteles
     return render(request, 'Hoteles.html', {'hoteles': hoteles})
 
-
-
-
 def habitaciones_hotel(request):
     hoteles = Hoteles.objects.all()
     hotel_id = request.GET.get('hotel', None)
@@ -122,3 +119,20 @@ def dashboard(request):
         'total_clientes': total_clientes,
         # Otros datos que quieras mostrar en el dashboard
     })
+    
+def nosotros(request):
+    # Puedes agregar lógica para obtener la información de la empresa aquí
+    informacion_empresa = {
+        'mision': 'Proporcionar experiencias de viaje inolvidables al ofrecer servicios de reserva de hoteles de alta calidad y en tiempo real.',
+        'vision': 'Convertirnos en la principal plataforma de reservas de hoteles, reconocida por la excelencia en el servicio y la satisfacción del cliente.',
+        'valores': ['Compromiso con la calidad', 'Atención al cliente excepcional', 'Innovación continua'],
+        'historia': 'Fundada en el año 2023, LesTour ha estado comprometida con brindar a los viajeros opciones de hospedaje excepcionales desde nuestros inicios.',
+        'equipo': [
+            {'nombre': 'Micaela Lugo', 'puesto': 'Presidenta de LesTour'},
+            {'nombre': 'Matias Arias', 'puesto': 'Director de Operaciones'},
+            {'nombre': 'Marcela Dresler', 'puesto': 'Lic. Hoteleria y Turismo'},
+        ],
+        'contactos': {'telefono': '+595992 986-754', 'correo': 'reservaslestour@turismo.edu.py'},
+    }
+
+    return render(request, 'nosotros.html', {'informacion_empresa': informacion_empresa})
