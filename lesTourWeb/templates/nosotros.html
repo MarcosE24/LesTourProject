@@ -1,30 +1,40 @@
 {% extends "Main.html" %}
-
 {% block content %}
-    <div class="container mx-auto my-8">
-        <h1 class="text-4xl font-bold mb-4">Nosotros</h1>
-        <p>{{ informacion_empresa.mision }}</p>
-        <h2 class="text-2xl font-bold mt-4">Visión</h2>
-        <p>{{ informacion_empresa.vision }}</p>
 
-        <h2 class="text-2xl font-bold mt-4">Valores</h2>
+<div class="flex-1  flex flex-col px-5 sm:px-10 py-4 gap-y-4 ">
+    <div class="bg-zinc-800 flex flex-col text-center p-5 rounded-2xl gap-y-2">
+        <h1 class="text-2xl font-bold">Nosotros</h1>
+        <p>{{ informacion_empresa.mision }}</p>
+    </div>
+    <div class="bg-zinc-800 flex flex-col text-center  p-5 rounded-2xl gap-y-2">
+        <h2 class="text-2xl font-bold">Visión</h2>
+        <p>{{ informacion_empresa.vision }}</p>
+    </div>
+    <div class="bg-zinc-800 flex flex-col text-center p-5 rounded-2xl gap-y-2">
+        <h2 class="text-2xl font-bold">Valores</h2>
         <ul>
             {% for valor in informacion_empresa.valores %}
                 <li>{{ valor }}</li>
             {% endfor %}
         </ul>
-
-        <h2 class="text-2xl font-bold mt-4">Historia</h2>
+    </div>
+    <div class="bg-zinc-800 flex flex-col text-center p-5 rounded-2xl gap-y-2">
+        <h2 class="text-2xl font-bold">Historia</h2>
         <p>{{ informacion_empresa.historia }}</p>
-
-        <h2 class="text-2xl font-bold mt-4">Equipo</h2>
+    </div>
+    <div class="bg-zinc-800 flex flex-col text-center p-5 rounded-2xl gap-y-2">
+        <h2 class="text-2xl font-bold">Equipo</h2>
         <ul>
             {% for miembro in informacion_empresa.equipo %}
                 <li>{{ miembro.nombre }} - {{ miembro.puesto }}</li>
             {% endfor %}
         </ul>
-        <h2 class="text-2xl font-bold mt-4">Contacto</h2>
+    </div>
+    <div class="bg-zinc-800 flex flex-col text-center p-5 rounded-2xl gap-y-2">
+        <h2 class="text-2xl font-bold">Contactos</h2>
         <p>Telefono: {{ informacion_empresa.contactos.telefono }}</p>
         <p>Correo Electrónico: {{ informacion_empresa.contactos.correo }}</p>
     </div>
+</div>
+
 {% endblock %}
