@@ -1,34 +1,15 @@
-<!DOCTYPE html>
-<head>
-    <title>Lista de Hoteles</title>
-    <style>
-        /* Agrega un espacio (margen inferior) entre cada elemento li */
-        li {
-            margin-bottom: 10px; /* Puedes ajustar el valor según sea necesario */
-        }
-    </style>
-</head>
-<body>
-    <h1>Lista de Hoteles</h1>
-    <ul>
-        {% for hotel in hoteles %}
-            <li>
-                <strong>Nombre:</strong> {{ hotel.nombre }}<br>
-                <strong>Ciudad:</strong> {{ hotel.ciudad }}<br>
-                <strong>Barrio:</strong> {{ hotel.barrio }}<br>
-                <strong>Dirección:</strong> {{ hotel.direccion }}<br>
-                <strong>Teléfono:</strong> {{ hotel.telefono }}<br>
-                <strong>Email:</strong> {{ hotel.email }}<br>
-                <strong>Pisos:</strong> {{ hotel.pisos }}<br>
-                <strong>Habitaciones:</strong> {{ hotel.habitaciones }}
-            </li>
-        {% endfor %}
-        <li>
-            <a href="/reservation">Reservación</a>
-        </li>
-        <li>
-            <a href="/">Home</a>
-        </li>
-    </ul>
-</body>
-</html>
+{% extends "Main.html" %}
+{% block content %}
+
+<div class="flex-1 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 px-5 items-center justify-items-center">
+    {% for hotel in hoteles %}
+        <div class="bg-zinc-800 w-96 flex flex-col text-center items-center p-5 rounded-2xl gap-y-4">
+            <h2 class="card-title">{{hotel.nombre}}</h2>
+            <p>{{hotel.ciudad}}</p>
+            <p>{{hotel.direccion}}</p>
+            <p>{{hotel.telefono}}</p>
+            <p>{{hotel.email}}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
