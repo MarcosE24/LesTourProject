@@ -100,7 +100,6 @@ def habitaciones_hotel(request):
 def es_admin(user):
     return user.is_authenticated and user.is_staff  # Suponiendo que el admin es un staff
 
-
 def dashboard(request):
     # Obtener recuentos de información
     total_hoteles = Hoteles.objects.count()

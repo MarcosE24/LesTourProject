@@ -1,4 +1,3 @@
-from . import models
 from django.contrib import admin
 from .models import Ciudades, Clientes, Hoteles, Habitacion, TipoHabitacion, Cargo, Areas, Empleados, ReservaHuesped, Reservas
 
