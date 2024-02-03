@@ -8,8 +8,6 @@ from django.contrib.auth.decorators import login_required
 from lesTourApp.models import Hoteles, Habitacion, Reservas, TipoHabitacion, Empleados, Clientes
 from datetime import datetime
 
-
-
 #CONSTANTES TEMPLATE
 SIGNUP_HTML_TEMPLATE = "signUp.html"
 CREATE_RESERVATION_HTML_TEMPLATE = "CreateReservation.html"
@@ -48,7 +46,8 @@ def signUp(request):    #Register view
             )
 
 def reservation(request):   #hay que ver que hacer con esta vista, si mostrar las reservas y el historial o quitarla
-    return render(request, "Reservation.html")
+    reservations = Reservas.objects.filter(cliente=request.user)
+    return render(request, "Reservation.html", {"reservations":reservations})
 
 @login_required
 def signOut(request):   #Logout function and show home view
@@ -77,6 +76,14 @@ def createReservation(request): #View that renders the page in "GET" and saves t
             if form.is_valid(): #Validate with ReservaForm from forms.py
                 new_reservation = form.save(commit=False) #"commit=false" to save the recovered data without committing to the DB
                 new_reservation.cliente = request.user   #Assign the user who created the reservation, obtained from the login
+                checkin_date_str = new_reservation.checkin_date.strftime("%d-%m-%Y")
+                checkout_date_str = new_reservation.checkout_date.strftime("%d-%m-%Y")
+                checkin = datetime.strptime(checkin_date_str, "%d-%m-%Y")
+                checkout = datetime.strptime(checkout_date_str, "%d-%m-%Y")
+                total_days = (checkout - checkin).days
+                habitacion = TipoHabitacion.objects.get(nombre=new_reservation.room)
+                cost = habitacion.costo * total_days
+                new_reservation.cost = cost
                 new_reservation.save()   #finally, commit to the DB
             return render(request, CREATE_RESERVATION_HTML_TEMPLATE, {"form":ReservaForm})
         except ValueError:

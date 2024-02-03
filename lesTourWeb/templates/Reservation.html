@@ -1,10 +1,17 @@
 {% extends "Main.html" %}
-
 {% block content %}
-<h1>Reservas</h1>
-<ul>
-    <li>
-        <a href="/">Home</a>
-    </li>
-</ul>
+
+<div class="flex-1 flex flex-col px-5 sm:px-10 py-5 gap-y-3">
+    {% for reservation in reservations %}
+        <div class="w-full flex flex-col bg-slate-400 dark:bg-gray-800 rounded-xl text-center gap-y-3 py-3">
+            <p>{{reservation.checkin_date}} - {{reservation.checkout_date}}</p>
+            <p><b>Habitacion:</b> {{reservation.room}}</p>
+            <p><b>Hotel:</b> {{reservation.hotel}}</p>
+            <p><b>Costo:</b> {{reservation.cost}} Gs.</p>
+            <p><b>Observación:</b> {{reservation.observation}}</p>
+            <p><b>Fecha de registro:</b> {{reservation.request_datetime}}</p>
+        </div>
+    {% endfor %}
+</div>
+
 {% endblock %}

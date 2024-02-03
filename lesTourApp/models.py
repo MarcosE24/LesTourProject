@@ -77,7 +77,7 @@ class Habitacion(models.Model): #tabla para registrar las habitaciones
     id_tipo_habitacion=models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
     id_hotel=models.ForeignKey(Hoteles, on_delete=models.CASCADE)
     def __str__(self):
-        return str(self.id_tipo_habitacion) + ": \"" + str(self.id_hotel) + "\""    #Devuelve el nombre y el hotel
+        return str(self.id_tipo_habitacion) #+ ": \"" + str(self.id_hotel) + "\""    #Devuelve el nombre y el hotel
     class Meta:
         verbose_name_plural = "Habitaciones"
 
