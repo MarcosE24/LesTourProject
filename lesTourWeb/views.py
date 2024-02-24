@@ -85,6 +85,13 @@ def createReservation(request): #View that renders the page in "GET" and saves t
                 cost = habitacion.costo * total_days
                 new_reservation.cost = cost
                 new_reservation.save()   #finally, commit to the DB
+                # Imprimir los datos guardados
+                print("Reserva guardada exitosamente:")
+                print(f"ID: {new_reservation.id}")
+                print(f"Cliente: {new_reservation.cliente}")
+                print(f"Fecha de entrada: {new_reservation.checkin_date}")
+                print(f"Fecha de salida: {new_reservation.checkout_date}")
+                print(f"Costo: {new_reservation.cost}")
             return render(request, CREATE_RESERVATION_HTML_TEMPLATE, {"form":ReservaForm})
         except ValueError:
             return render(request, CREATE_RESERVATION_HTML_TEMPLATE, {"form":ReservaForm, "error":"Ingrese datos validos porfavor"})
@@ -103,19 +110,15 @@ def habitaciones_hotel(request):
 
     return render(request, 'habitaciones_hotel.html', {'habitaciones': habitaciones, 'hoteles': hoteles})
 
-# Decorador para restringir el acceso a administradores
 def es_admin(user):
-    return user.is_authenticated and user.is_staff  # Suponiendo que el admin es un staff
+    return user.is_authenticated and user.is_staff 
 
 def dashboard(request):
-    # Obtener recuentos de información
     total_hoteles = Hoteles.objects.count()
     total_habitaciones = Habitacion.objects.count()
     total_reservas = Reservas.objects.count()
     total_empleados = Empleados.objects.count()
     total_clientes = Clientes.objects.count()
-
-    # Obtener información adicional si es necesario...
 
     return render(request, 'dashboard.html', {
         'total_hoteles': total_hoteles,
@@ -123,11 +126,9 @@ def dashboard(request):
         'total_reservas': total_reservas,
         'total_empleados': total_empleados,
         'total_clientes': total_clientes,
-        # Otros datos que quieras mostrar en el dashboard
     })
     
 def nosotros(request):
-    # Puedes agregar lógica para obtener la información de la empresa aquí
     informacion_empresa = {
         'mision': 'Proporcionar experiencias de viaje inolvidables al ofrecer servicios de reserva de hoteles de alta calidad y en tiempo real.',
         'vision': 'Convertirnos en la principal plataforma de reservas de hoteles, reconocida por la excelencia en el servicio y la satisfacción del cliente.',
